@@ -16,5 +16,9 @@ requirements.txt: $(ENV) requirements.in
 pex: requirements.txt $(ENV)
 	./$(ENV)/bin/python3 setup.py bdist_pex --pex-args='--disable-cache -vvvv -r requirements.txt --pip-version 24.0' --bdist-all
 
+pex_tox: $(ENV)
+	./$(ENV)/bin/pip install -r toxpex.in
+	./$(ENV)/bin/tox -e bundle
+
 clean:
 	rm -fr "$(ENV)" dist requirements.txt __pycache__
